@@ -9,7 +9,7 @@ def create_socket():
         global s
         host = ""
         port = 9999
-        s = socket.socket()  # add comment ...
+        s = socket.socket()  # the socket() function returns a socket object whose methods implement the various socket system calls.
 
     except socket.error as msg:
         print('Socket creation error: ' + str(msg))
@@ -23,8 +23,8 @@ def bind_socket():
         global s
         print('Binding the port ' + str(port))
 
-        s.bind((host, port))  # add comment ...
-        s.listen(5)  # add comment ...
+        s.bind((host, port))  # binding the socket locally
+        s.listen(5)  # we are using 5 incoming connection before denying any more
 
     except socket.error as msg:
         print('Socket binding error' + str(msg) + '\n' + 'Retrying ...')
@@ -34,7 +34,7 @@ def bind_socket():
 
 
 def socket_accept():
-    conn, address = s.accept()  # add comment ...
+    conn, address = s.accept()  # only works if there is connection or incoming connection
     print('Connection has been established |' + ' IP ' + address[0] + ' | Port ' + str(address[1]))
     send_commands(conn)
     conn.close()
@@ -46,7 +46,7 @@ def send_commands(conn):
         cmd = input()
         if cmd == 'quit':
             conn.close()
-            s.close()  # add comment ...
+            s.close()  # closing the socket
             sys.exit()
         if len(str.encode(cmd)) > 0:
             conn.send(str.encode(cmd))

